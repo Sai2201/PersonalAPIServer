@@ -1,0 +1,64 @@
+openapi: 3.0.1
+info:
+  title: Modern Personal API Server
+  version: 1.0.0
+  description: API for managing key-value JSON data locally
+
+paths:
+  /api/store/{key}:
+    post:
+      summary: Store a JSON object by key
+      parameters:
+        - name: key
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Object stored successfully
+          content:
+            text/plain:
+              schema:
+                type: string
+
+    get:
+      summary: Retrieve a stored JSON object by key
+      operationId: getObjectByKey
+      parameters:
+        - name: key
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The stored JSON object
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+        '404':
+          description: Object not found
+
+  /api/store/:
+    get:
+      summary: List all stored key-value pairs
+      operationId: listAll
+      responses:
+        '200':
+          description: All key-value pairs
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
