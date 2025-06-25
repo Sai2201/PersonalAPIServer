@@ -27,10 +27,11 @@ public class ObjectStoreController implements DefaultApi {
 
   @Override
   public ResponseEntity<Object> getObjectByKey(String key) {
-    try{
+    try {
       return ResponseEntity.ok(store.get(key));
     } catch (Exception e) {
-      return ResponseEntity.status(500).body(Map.of("error", "Error retrieving key: " + e.getMessage()));
+      return ResponseEntity.status(500)
+          .body(Map.of("error", "Error retrieving key: " + e.getMessage()));
     }
   }
 

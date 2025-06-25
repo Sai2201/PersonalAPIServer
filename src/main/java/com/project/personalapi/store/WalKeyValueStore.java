@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -126,5 +125,14 @@ public class WalKeyValueStore {
       index.put(key, offset);
     }
     LOGGER.info("Rebuilt index with {} entries from WAL file.", index.size());
+  }
+
+  public int getWriteCount() {
+    return writeCount;
+  }
+
+  public void resetWriteCount() {
+    this.writeCount = 0;
+    LOGGER.info("Write count reset to zero.");
   }
 }
